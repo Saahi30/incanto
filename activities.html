@@ -1060,5 +1060,43 @@
     }
   </script>
 
+
+<script>
+(function() {
+    function interceptLinks() {
+        document.addEventListener('click', function(e) {
+            let el = e.target.closest('a, button, [data-framer-name="Primary Button"], [data-framer-name="Get Ticket"]');
+            if (el) {
+                let text = (el.innerText || '').toLowerCase();
+                let name = (el.getAttribute('data-framer-name') || '').toLowerCase();
+                if (text.includes('get ticket') || text.includes('see more') || text.includes('outfit') || 
+                    name.includes('get ticket') || name.includes('primary button')) {
+                    
+                    // Don't redirect if we are already on activities.html
+                    if (!window.location.pathname.endsWith('activities.html') && 
+                        window.location.href !== 'https://www.incanto26.in/activities.html') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = 'https://www.incanto26.in/activities.html';
+                    }
+                }
+            }
+        }, true);
+        
+        let style = document.createElement('style');
+        style.innerHTML = `
+            [data-framer-name="Primary Button"], [data-framer-name="Get Ticket"] { cursor: pointer !important; }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', interceptLinks);
+    } else {
+        interceptLinks();
+    }
+})();
+</script>
+
 </body>
 </html>
