@@ -312,4 +312,84 @@
     <!-- End of bodyEnd -->
 
 
-<div id="__framer-editorbar-container" dir="ltr" style="right: 10px; top: calc(-15px + 50vh); transform: translate(0px, 0px); transition: transform 100ms cubic-bezier(0.2, 0, 0, 1); cursor: pointer;"><span aria-label="Edit Framer Content" id="__framer-editorbar-label" style="right: 40px;">Edit Content</span><button type="button" aria-labelledby="__framer-editorbar-label" id="__framer-editorbar-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"><path d="M8.75 2.25a1.77 1.77 0 0 1 2.5 0h0c.69.69.69 1.81 0 2.5l-7 7h-2.5v-2.5Z" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 11.75h3.75" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round"></path></svg></button></div><iframe id="__framer-editorbar" src="https://framer.com/edit?framerSiteId=c652adbb4d8b9c277592ebba7f63d533078b4c6692cd1f850255719803bb6a7e&amp;source=spiky-sunflower-112987.framer.app&amp;features=%7B%22editorBarDisableFrameAncestorsSecurity%22%3Afalse%2C%22onPageLocalizationSupport%22%3Atrue%2C%22onPageMoveTool%22%3Atrue%7D&amp;loadStart=1773850285088" aria-hidden="true" allow="autoplay" tabindex="-1" class="status_visually_hidden"></iframe></body></html>
+<div id="__framer-editorbar-container" dir="ltr" style="right: 10px; top: calc(-15px + 50vh); transform: translate(0px, 0px); transition: transform 100ms cubic-bezier(0.2, 0, 0, 1); cursor: pointer;"><span aria-label="Edit Framer Content" id="__framer-editorbar-label" style="right: 40px;">Edit Content</span><button type="button" aria-labelledby="__framer-editorbar-label" id="__framer-editorbar-button"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"><path d="M8.75 2.25a1.77 1.77 0 0 1 2.5 0h0c.69.69.69 1.81 0 2.5l-7 7h-2.5v-2.5Z" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 11.75h3.75" fill="transparent" stroke-width="1.5" stroke="currentColor" stroke-linecap="round"></path></svg></button></div><iframe id="__framer-editorbar" src="https://framer.com/edit?framerSiteId=c652adbb4d8b9c277592ebba7f63d533078b4c6692cd1f850255719803bb6a7e&amp;source=spiky-sunflower-112987.framer.app&amp;features=%7B%22editorBarDisableFrameAncestorsSecurity%22%3Afalse%2C%22onPageLocalizationSupport%22%3Atrue%2C%22onPageMoveTool%22%3Atrue%7D&amp;loadStart=1773850285088" aria-hidden="true" allow="autoplay" tabindex="-1" class="status_visually_hidden"></iframe>
+<style>
+/* Activities button injected into nav */
+.incanto-activities-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 18px;
+  background: linear-gradient(135deg, rgba(28, 43, 255, 0.85) 0%, rgba(100, 60, 255, 0.85) 100%);
+  border-radius: 100px;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 2px 16px rgba(28,43,255,0.25);
+  transition: all 0.22s cubic-bezier(.4,0,.2,1);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.incanto-activities-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.incanto-activities-btn:hover::before {
+  opacity: 1;
+}
+.incanto-activities-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 24px rgba(28,43,255,0.45);
+}
+.incanto-activities-btn svg {
+  flex-shrink: 0;
+}
+@media (max-width: 809px) {
+  .incanto-activities-btn { font-size: 13px; padding: 7px 14px; }
+}
+</style>
+<script>
+(function() {
+  function injectActivitiesBtn() {
+    // Find the nav Links element and inject before the yk7xmc-container
+    var containers = document.querySelectorAll('.framer-18kiu0w');
+    containers.forEach(function(container) {
+      // Only inject if not already done
+      if (container.querySelector('.incanto-activities-btn')) return;
+      var btn = document.createElement('a');
+      btn.href = './activities.html';
+      btn.className = 'incanto-activities-btn';
+      btn.id = 'activities-nav-btn';
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Activities';
+      // Insert before the yk7xmc-container or at the start of the content div
+      var ticketContainer = container.querySelector('.framer-yk7xmc-container');
+      if (ticketContainer) {
+        container.insertBefore(btn, ticketContainer);
+      } else {
+        container.prepend(btn);
+      }
+    });
+  }
+  // Run after DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectActivitiesBtn);
+  } else {
+    injectActivitiesBtn();
+  }
+  // Also try after a short delay in case Framer hydrates later
+  setTimeout(injectActivitiesBtn, 800);
+})();
+</script>
+</body></html>
