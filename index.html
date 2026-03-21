@@ -6,7 +6,7 @@
 	<!-- Start of headStart -->
     
     <!-- End of headStart -->
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 	<meta name="generator" content="Framer 10141bf">
 	<title>Incanto26</title>
     <meta name="description" content="Freshers 2026 @ Polaris School of Technology">
@@ -434,6 +434,24 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap');
 
+  /* Global fixes for Framer mobile overflow and injected component padding */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    position: relative;
+  }
+
+  /* Force Framer's root container to respect the viewport */
+  #main, [data-framer-root] {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+  }
+
   /* Prevent background scroll when overlay is open */
   body.theme-reveal-open {
     overflow: hidden;
@@ -642,6 +660,8 @@
 
   .tr-input-row {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
     width: 100%;
     max-width: 420px;
@@ -1399,10 +1419,27 @@ function launchConfetti() {
   /* Mobile positioning */
   @media (max-width: 600px) {
     #new-activity-toast {
-      bottom: 20px;
-      right: 20px;
-      left: 20px;
+      bottom: auto;
+      top: 80px; /* Move to top on mobile */
+      right: 16px;
+      left: 16px;
       padding: 14px 16px;
+      max-width: calc(100vw - 32px);
+      transform: translateY(-40px) scale(0.95);
+    }
+    #new-activity-toast.show {
+      transform: translateY(0) scale(1);
+    }
+    body.rave-theme #new-activity-toast:hover, #new-activity-toast:hover {
+      transform: scale(1.02) translateY(2px);
+    }
+
+    /* Force Framer giant text to scale down */
+    [data-framer-name="Ticker"] h2,
+    .framer-text {
+      font-size: clamp(24px, 6vw, 42px) !important;
+      line-height: 1.3 !important;
+      white-space: normal !important;
     }
   }
 </style>
