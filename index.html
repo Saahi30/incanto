@@ -439,17 +439,14 @@
     box-sizing: border-box;
   }
   
-  html, body {
+  body {
     overflow-x: hidden;
-    width: 100vw;
-    position: relative;
   }
 
-  /* Force Framer's root container to respect the viewport */
+  /* Force Framer's root container to respect the viewport horizontally */
   #main, [data-framer-root] {
     overflow-x: hidden !important;
     max-width: 100vw !important;
-    width: 100% !important;
   }
 
   /* Prevent background scroll when overlay is open */
