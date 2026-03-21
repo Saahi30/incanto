@@ -6,7 +6,7 @@
 	<!-- Start of headStart -->
     
     <!-- End of headStart -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="generator" content="Framer 10141bf">
 	<title>Incanto26</title>
     <meta name="description" content="Freshers 2026 @ Polaris School of Technology">
@@ -434,8 +434,9 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap');
 
-  /* Global fixes for Framer mobile overflow and injected component padding */
-  *, *::before, *::after {
+  /* Apply box-sizing ONLY to custom elements to prevent Framer native component heights from collapsing */
+  #theme-reveal-overlay, #theme-reveal-overlay *,
+  #new-activity-toast, #new-activity-toast * {
     box-sizing: border-box;
   }
   
@@ -454,10 +455,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Start from top for scrolling */
     font-family: 'Space Grotesk', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto; /* Enable vertical scroll */
     transition: opacity 0.8s ease;
+    padding: 60px 0; /* Add top/bottom padding for mobile breathing room */
   }
 
   /* Animated grid background */
